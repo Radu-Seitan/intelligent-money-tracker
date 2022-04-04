@@ -1,11 +1,13 @@
-﻿using IMT_Backend.Domain.Enums;
+﻿using IMT_Backend.Domain.Common;
+using IMT_Backend.Domain.Enums;
 
 namespace IMT_Backend.Domain.Entities
 {
-    public class Income
+    public class Income : BaseEntity
     {
-        public int Id { get; set; }
         public float Quantity { get; set; }
         public IncomeCategory Category { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
     }
 }
