@@ -1,8 +1,9 @@
-﻿namespace IMT_Backend.Domain.Entities
+﻿using IMT_Backend.Domain.Common;
+
+namespace IMT_Backend.Domain.Entities
 {
-    public class Store
+    public class Store : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public Guid? ImageId { get; set; }
         public AppImage Image { get; set; }
