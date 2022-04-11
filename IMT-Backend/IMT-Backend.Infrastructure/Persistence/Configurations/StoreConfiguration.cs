@@ -17,6 +17,10 @@ namespace IMT_Backend.Infrastructure.Persistence.Configurations
                 .HasForeignKey(s => s.ImageId)
                 .OnDelete(DeleteBehavior.SetNull)
                 .IsRequired(false);
+            builder.HasMany(s => s.Expenses)
+                .WithOne(e => e.Store)
+                .HasForeignKey(e => e.StoreId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

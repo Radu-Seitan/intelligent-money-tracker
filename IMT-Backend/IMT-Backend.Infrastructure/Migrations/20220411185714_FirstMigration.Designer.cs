@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMT_Backend.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220411114355_FirstMigration")]
+    [Migration("20220411185714_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,13 +61,18 @@ namespace IMT_Backend.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("Quantity")
-                        .HasColumnType("real");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
 
                     b.HasIndex("UserId");
 
@@ -88,8 +93,8 @@ namespace IMT_Backend.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("Quantity")
-                        .HasColumnType("real");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -132,8 +137,8 @@ namespace IMT_Backend.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<float>("Sum")
-                        .HasColumnType("real");
+                    b.Property<double>("Sum")
+                        .HasColumnType("float");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -147,10 +152,18 @@ namespace IMT_Backend.Infrastructure.Migrations
 
             modelBuilder.Entity("IMT_Backend.Domain.Entities.Expense", b =>
                 {
+                    b.HasOne("IMT_Backend.Domain.Entities.Store", "Store")
+                        .WithMany("Expenses")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IMT_Backend.Domain.Entities.User", "User")
                         .WithMany("Expenses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Store");
 
                     b.Navigation("User");
                 });
@@ -178,6 +191,11 @@ namespace IMT_Backend.Infrastructure.Migrations
             modelBuilder.Entity("IMT_Backend.Domain.Entities.AppImage", b =>
                 {
                     b.Navigation("Stores");
+                });
+
+            modelBuilder.Entity("IMT_Backend.Domain.Entities.Store", b =>
+                {
+                    b.Navigation("Expenses");
                 });
 
             modelBuilder.Entity("IMT_Backend.Domain.Entities.User", b =>
