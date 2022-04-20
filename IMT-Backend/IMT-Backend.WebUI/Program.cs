@@ -1,4 +1,7 @@
+using IMT_Backend.Application;
+using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Infrastructure;
+using IMT_Backend.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
