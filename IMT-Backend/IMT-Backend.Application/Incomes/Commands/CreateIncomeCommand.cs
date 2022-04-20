@@ -15,9 +15,11 @@ namespace IMT_Backend.Application.Incomes.Commands
     public class CraeteIncomeCommandHandler : IRequestHandler<CreateIncomeCommand, Unit>
     {
         private readonly IIncomeRepository _incomeRepository;
-        public CraeteIncomeCommandHandler(IIncomeRepository incomeRepository)
+        private readonly IUserRepository _userRepository;
+        public CraeteIncomeCommandHandler(IIncomeRepository incomeRepository, IUserRepository userRepository)
         {
             _incomeRepository = incomeRepository;
+            _userRepository = userRepository;   
         }
         public async Task<Unit> Handle(CreateIncomeCommand request, CancellationToken cancellationToken)
         {
@@ -29,6 +31,7 @@ namespace IMT_Backend.Application.Incomes.Commands
             };
 
             await _incomeRepository.CreateIncome(income);
+            await _userRepository.IncreaseSum(request.UserId, request.Quantity);
             return Unit.Value;
         }
     }

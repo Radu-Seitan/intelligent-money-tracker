@@ -1,5 +1,6 @@
 ﻿using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Entities;
+using IMT_Backend.Domain.Enums;
 using IMT_Backend.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,23 @@ namespace IMT_Backend.Infrastructure.Repositories
                 .Select(i => i.Quantity)
                 .SumAsync();
             return totalIncome;
+        }
+        public async Task<IEnumerable<Income>> GetUserIncomesByCategory(string userId, IncomeCategory incomeCategory)
+        {
+            var incomes = await _appDbContext.Incomes
+                .Where(i => i.UserId == userId && i.Category == incomeCategory)
+                .ToListAsync();
+
+            return incomes;
+        }
+
+        public async Task<IEnumerable<Income>> GetAllIncomesByCategory(IncomeCategory incomeCategory)
+        {
+            var incomes = await _appDbContext.Incomes
+                .Where(i => i.Category == incomeCategory)
+                .ToListAsync();
+
+            return incomes;
         }
     }
 }
