@@ -22,9 +22,8 @@ namespace IMT_Backend.Application.Images.Commands
         public async Task<Guid> Handle(UploadImageCommand request, CancellationToken cancellationToken)
         {
             var image = await _appImageRepository.UploadImage(request.Content, request.Type, request.StoreId);
-            var store = await _storeRepository.GetStore(request.StoreId);
 
-            store.ImageId = image.Id;
+            await _storeRepository.UploadStoreImage(request.StoreId, image.Id);
 
             return image.Id;
         }

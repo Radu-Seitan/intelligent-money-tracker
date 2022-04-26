@@ -19,7 +19,7 @@ namespace IMT_Backend.WebUI.Controllers
         }
 
         [HttpPost("{storeId}")]
-        public async Task<IActionResult> Post(IFormFile file, int storeId)
+        public async Task<IActionResult> Post(IFormFile file, [FromRoute] int storeId)
         {
             if (file != null)
             {

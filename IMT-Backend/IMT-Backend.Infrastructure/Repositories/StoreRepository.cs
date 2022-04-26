@@ -24,5 +24,14 @@ namespace IMT_Backend.Infrastructure.Repositories
         {
             return _appDbContext.Stores;
         }
+
+        public async Task UploadStoreImage(int storeId, Guid? imageId)
+        {
+            var store = await GetStore(storeId);
+            
+            store.ImageId = imageId;
+
+            await _appDbContext.SaveChangesAsync();
+        }
     }
 }
