@@ -14,12 +14,6 @@
   <ItemGroup>
     <Folder Include="Common\Events\" />
     <Folder Include="Common\Exceptions\" />
-    <Folder Include="Expenses\Commands\" />
-    <Folder Include="Expenses\Queries\" />
-    <Folder Include="Images\Commands\" />
-    <Folder Include="Images\Queries\" />
-    <Folder Include="Stores\Commands\" />
-    <Folder Include="Stores\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

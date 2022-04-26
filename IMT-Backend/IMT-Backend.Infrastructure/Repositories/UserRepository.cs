@@ -32,5 +32,13 @@ namespace IMT_Backend.Infrastructure.Repositories
 
             await _appDbContext.SaveChangesAsync();
         }
+        public async Task DecreaseSum(string id, double amount)
+        {
+            var user = await _appDbContext.Users.FindAsync(id);
+
+            user.Sum -= amount;
+
+            await _appDbContext.SaveChangesAsync();
+        }
     }
 }

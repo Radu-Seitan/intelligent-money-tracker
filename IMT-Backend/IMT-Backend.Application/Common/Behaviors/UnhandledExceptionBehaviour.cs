@@ -22,7 +22,7 @@ namespace IMT_Backend.Application.Common.Behaviors
             {
                 var requestName = typeof(TRequest).Name;
 
-                _logger.LogError(ex, "ChatA Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "IMT Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }

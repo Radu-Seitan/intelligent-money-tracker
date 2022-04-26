@@ -17,15 +17,15 @@ namespace IMT_Backend.WebUI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(typeof(double), StatusCodes.Status200OK)]
+        [HttpGet("{userId}")]
+        [ProducesResponseType(typeof(IEnumerable<IncomeDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<double>> GetTotalIncome([FromRoute] string id)
+        public async Task<ActionResult<IEnumerable<IncomeDto>>> GetAllUserIncomes([FromRoute] string userId)
         {
-            var query = new GetUserTotalIncomeQuery { UserId = id };
-            var total = await _mediator.Send(query);
-            return Ok(total);
+            var query = new GetAllUserIncomesQuery { UserId = userId };
+            var incomes = await _mediator.Send(query);
+            return Ok(incomes);
         }
 
         [HttpGet("{userId}/{category}")]
@@ -39,6 +39,18 @@ namespace IMT_Backend.WebUI.Controllers
                 UserId = userId,
                 Category = (IncomeCategory)category
             };
+
+            var incomes = await _mediator.Send(query);
+            return Ok(incomes);
+        }
+
+        [HttpGet("all")]
+        [ProducesResponseType(typeof(IEnumerable<IncomeDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<IncomeDto>>> GetAllIncomes()
+        {
+            var query = new GetAllIncomesQuery { };
 
             var incomes = await _mediator.Send(query);
             return Ok(incomes);

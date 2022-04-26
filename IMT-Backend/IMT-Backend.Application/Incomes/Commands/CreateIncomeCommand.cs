@@ -12,11 +12,11 @@ namespace IMT_Backend.Application.Incomes.Commands
         public string UserId { get; set; }
     }
 
-    public class CraeteIncomeCommandHandler : IRequestHandler<CreateIncomeCommand, Unit>
+    public class CreateIncomeCommandHandler : IRequestHandler<CreateIncomeCommand, Unit>
     {
         private readonly IIncomeRepository _incomeRepository;
         private readonly IUserRepository _userRepository;
-        public CraeteIncomeCommandHandler(IIncomeRepository incomeRepository, IUserRepository userRepository)
+        public CreateIncomeCommandHandler(IIncomeRepository incomeRepository, IUserRepository userRepository)
         {
             _incomeRepository = incomeRepository;
             _userRepository = userRepository;   
