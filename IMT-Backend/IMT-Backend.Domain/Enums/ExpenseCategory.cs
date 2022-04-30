@@ -7,6 +7,7 @@
         Vacation,
         Entertainment,
         Stocks,
-        CryptoCurrency
+        CryptoCurrency,
+        Other
     }
 }

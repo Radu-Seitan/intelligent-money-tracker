@@ -32,9 +32,8 @@ namespace IMT_Backend.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("StoreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()

@@ -6,6 +6,7 @@
         Stocks,
         Sales,
         CryptoCurrency,
-        Gambling
+        Gambling,
+        Other
     }
 }

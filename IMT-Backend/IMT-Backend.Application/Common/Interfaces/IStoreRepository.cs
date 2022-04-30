@@ -7,5 +7,6 @@ namespace IMT_Backend.Application.Common.Interfaces
         Task CreateStore(Store store);
         Task<IEnumerable<Store>> GetStores();
         Task<Store> GetStore(int id);
+        Task UploadStoreImage(int storeId, Guid? imageid);
     }
 }

@@ -11,12 +11,13 @@ namespace IMT_Backend.Infrastructure.Repositories
         {
             _appDbContext = appDbContext;
         }
-        public async Task<AppImage> UploadImage(byte[] content, string type)
+        public async Task<AppImage> UploadImage(byte[] content, string type, int storeId)
         {
             var appImage = new AppImage
             {
                 Content = content,
                 Type = type,
+                StoreId = storeId
             };
 
             _appDbContext.Images.Add(appImage);
@@ -33,7 +34,8 @@ namespace IMT_Backend.Infrastructure.Repositories
 
         public async Task<AppImage> GetImage(Guid imageId)
         {
-            return await _appDbContext.Images.FindAsync(imageId);
+            var image = await _appDbContext.Images.FindAsync(imageId);
+            return image;
         }
     }
 }
