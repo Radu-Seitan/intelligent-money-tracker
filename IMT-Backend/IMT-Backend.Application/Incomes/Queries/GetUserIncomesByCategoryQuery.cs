@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Enums;
@@ -26,6 +27,14 @@ namespace IMT_Backend.Application.Incomes.Queries
             var incomes = await _incomeRepository.GetUserIncomesByCategory(request.UserId, request.Category);
 
             return _mapper.Map<IEnumerable<IncomeDto>>(incomes);
+        }
+    }
+    public class GetUserIncomesByCategoryQueryValidator : AbstractValidator<GetUserIncomesByCategoryQuery>
+    {
+        public GetUserIncomesByCategoryQueryValidator()
+        {
+            RuleFor(i => i.UserId).NotNull();
+            RuleFor(i => i.Category).NotNull();
         }
     }
 }

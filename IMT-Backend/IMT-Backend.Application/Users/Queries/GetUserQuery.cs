@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Entities;
@@ -24,6 +25,14 @@ namespace IMT_Backend.Application.Users.Queries
             var user = await _userRepository.GetUser(request.UserId);
 
             return _mapper.Map<UserDto>(user);
+        }
+    }
+
+    public class GetUserQueryValidator : AbstractValidator<GetUserQuery>
+    {
+        public GetUserQueryValidator()
+        {
+            RuleFor(u => u.UserId).NotNull();
         }
     }
 }

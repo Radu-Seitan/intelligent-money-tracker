@@ -38,10 +38,12 @@ namespace IMT_Backend.Application.Users.Commands
     {
         public CreateUserCommandValidator()
         {
-            RuleFor(v => v.Id)
+            RuleFor(u => u.Id)
                 .NotNull();
-            RuleFor(v => v.Username)
+            RuleFor(u => u.Username)
                 .MaximumLength(40)
+                .NotNull();
+            RuleFor(u => u.Sum)
                 .NotNull();
         }
     }
