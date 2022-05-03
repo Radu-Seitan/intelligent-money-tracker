@@ -1,4 +1,5 @@
-﻿using IMT_Backend.Application.Common.Interfaces;
+﻿using FluentValidation;
+using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Entities;
 using IMT_Backend.Domain.Enums;
 using MediatR;
@@ -33,6 +34,18 @@ namespace IMT_Backend.Application.Incomes.Commands
             await _incomeRepository.CreateIncome(income);
             await _userRepository.IncreaseSum(request.UserId, request.Quantity);
             return Unit.Value;
+        }
+        public class CreateIncomeCommandValidator : AbstractValidator<CreateIncomeCommand>
+        {
+            public CreateIncomeCommandValidator()
+            {
+                RuleFor(i => i.Quantity)
+                    .NotNull();
+                RuleFor(i => i.Category)
+                    .NotNull();
+                RuleFor(i => i.UserId)
+                    .NotNull();
+            }
         }
     }
 }

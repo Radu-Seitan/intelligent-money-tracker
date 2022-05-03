@@ -1,4 +1,5 @@
-﻿using IMT_Backend.Application.Common.Interfaces;
+﻿using FluentValidation;
+using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Entities;
 using MediatR;
 
@@ -21,6 +22,13 @@ namespace IMT_Backend.Application.Images.Queries
         {
             var image = await _appImageRepository.GetImage(request.ImageId);
             return image;
+        }
+    }
+    public class GetImageQueryValidator : AbstractValidator<GetImageQuery>
+    {
+        public GetImageQueryValidator()
+        {
+            RuleFor(i => i.ImageId).NotNull();
         }
     }
 }

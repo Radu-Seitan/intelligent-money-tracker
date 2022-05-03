@@ -1,4 +1,5 @@
-﻿using IMT_Backend.Application.Common.Interfaces;
+﻿using FluentValidation;
+using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Entities;
 using IMT_Backend.Domain.Enums;
 using MediatR;
@@ -36,6 +37,20 @@ namespace IMT_Backend.Application.Expenses.Commands
             await _expenseRepository.CreateExpense(expense);
             await _userRepository.DecreaseSum(request.UserId,request.Quantity);
             return Unit.Value;
+        }
+    }
+    public class CreateExpenseCommandValidator : AbstractValidator<CreateExpenseCommand>
+    {
+        public CreateExpenseCommandValidator()
+        {
+            RuleFor(e => e.Quantity)
+                .NotNull();
+            RuleFor(e => e.Category)
+                .NotNull();
+            RuleFor(e => e.UserId)
+                .NotNull();
+            RuleFor(e => e.StoreId)
+                .NotNull();
         }
     }
 }

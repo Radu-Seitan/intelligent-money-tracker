@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using MediatR;
@@ -9,11 +10,11 @@ namespace IMT_Backend.Application.Incomes.Queries
     {
         public string UserId { get; set; }
     }
-    public class GetUserTotalIncomeQueryHandler : IRequestHandler<GetAllUserIncomesQuery, IEnumerable<IncomeDto>>
+    public class GetAllUserIncomesQueryHandler : IRequestHandler<GetAllUserIncomesQuery, IEnumerable<IncomeDto>>
     {
         private readonly IIncomeRepository _incomeRepository;
         private readonly IMapper _mapper;
-        public GetUserTotalIncomeQueryHandler(IIncomeRepository incomeRepositorys, IMapper mapper)
+        public GetAllUserIncomesQueryHandler(IIncomeRepository incomeRepositorys, IMapper mapper)
         {
             _incomeRepository = incomeRepositorys;
             _mapper = mapper;
@@ -25,4 +26,12 @@ namespace IMT_Backend.Application.Incomes.Queries
             return _mapper.Map<IEnumerable<IncomeDto>>(incomes);
         }
     }
+    public class GetAllUserIncomesQueryValidator : AbstractValidator<GetAllUserIncomesQuery>
+    {
+        public GetAllUserIncomesQueryValidator()
+        {
+            RuleFor(i => i.UserId).NotNull();
+        }
+    }
+
 }

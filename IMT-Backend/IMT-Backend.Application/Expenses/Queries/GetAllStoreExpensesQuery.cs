@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using MediatR;
@@ -24,6 +25,13 @@ namespace IMT_Backend.Application.Expenses.Queries
             var expenses = await _expenseRepository.GetAllStoreExpenses(request.StoreId);
 
             return  _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        }
+    }
+    public class GetAllStoreExpensesQueryValidator : AbstractValidator<GetAllStoreExpensesQuery>
+    {
+        public GetAllStoreExpensesQueryValidator()
+        {
+            RuleFor(e => e.StoreId).NotNull();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace IMT_Backend.Application.Stores.Commands
     {
         public CreateStoreCommandValidator()
         {
-            RuleFor(v => v.Name)
+            RuleFor(s => s.Name)
                 .MaximumLength(40)
                 .NotNull();
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Domain.Enums;
@@ -26,6 +27,14 @@ namespace IMT_Backend.Application.Expenses.Queries
             var expenses = await _expenseRepository.GetStoreExpensesByCategory(request.StoreId, request.Category);
 
             return _mapper.Map<IEnumerable<ExpenseDto>>(expenses);
+        }
+    }
+    public class GetStoreExpensesByCategoryQueryValidator : AbstractValidator<GetStoreExpensesByCategoryQuery>
+    {
+        public GetStoreExpensesByCategoryQueryValidator()
+        {
+            RuleFor(e => e.StoreId).NotNull();
+            RuleFor(e => e.Category).NotNull();
         }
     }
 }

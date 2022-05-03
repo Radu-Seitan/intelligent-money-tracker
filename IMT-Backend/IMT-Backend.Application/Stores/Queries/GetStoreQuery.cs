@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using IMT_Backend.Application.Common.DTOs;
 using IMT_Backend.Application.Common.Interfaces;
 using MediatR;
@@ -24,6 +25,13 @@ namespace IMT_Backend.Application.Stores.Queries
             var store = await _storeRepository.GetStore(request.StoreId);
 
             return _mapper.Map<StoreDto>(store);
+        }
+    }
+    public class GetStoreQueryValidator : AbstractValidator<GetStoreQuery>
+    {
+        public GetStoreQueryValidator()
+        {
+            RuleFor(s => s.StoreId).NotNull();
         }
     }
 }
