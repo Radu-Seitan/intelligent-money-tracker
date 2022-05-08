@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
     {
         policy.AllowAnyHeader()
             .AllowAnyMethod()
+            .WithOrigins("https://localhost:4200/")
             .AllowCredentials();
     });
 });
@@ -42,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("ClientPermission");
 
 app.UseAuthorization();
 
