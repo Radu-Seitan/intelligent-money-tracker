@@ -1,4 +1,4 @@
 export interface Base {
   id?: number,
-  created: string,
+  created?: string,
 }
