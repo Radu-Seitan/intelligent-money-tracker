@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'IMT-Frontend';
+  showPassword: boolean = true;
+
+
+  getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
 }
