@@ -1,6 +1,7 @@
 using IMT_Backend.Application;
 using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Infrastructure;
+using IMT_Backend.WebUI.Extensions;
 using IMT_Backend.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Migrate Database
+app.MigrateDatabase();
 
 app.UseHttpsRedirection();
 
