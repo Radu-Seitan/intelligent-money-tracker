@@ -12,6 +12,9 @@ services:
       dockerfile: ./Dockerfile
     container_name: imt-backend
     restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:7165/
     ports:
       - 7165:7165
     networks:
@@ -53,6 +56,6 @@ services:
 
 volumes:
   dbdata:
-    name: giveaway-mssql
+    name: sqlserver
   node_modules:
     name: node-modules
