@@ -32,6 +32,8 @@ export class AuthService {
   signUp(authData: AuthData, user: User) {
     this._fireAuth.createUserWithEmailAndPassword(authData.email, authData.password).then((res) => {
       user.id = res.user?.uid;
+      user.expenses = [];
+      user.incomes = [];
       this._userService.createUser(user).subscribe()
     }).catch(error => console.error(error));
   }
@@ -48,7 +50,6 @@ export class AuthService {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         JSON.parse(localStorage.getItem('user')!);
-        console.log(user.uid)
         this._userService.getUserById(user.uid).subscribe(data => this.currentUser = data);
       } else {
         localStorage.setItem('user', '{}');
