@@ -23,17 +23,6 @@ builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("ClientPermission", policy =>
-    {
-        policy.AllowAnyHeader()
-            .AllowAnyMethod()
-            .WithOrigins("https://localhost:4200/")
-            .AllowCredentials();
-    });
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,9 +35,7 @@ if (app.Environment.IsDevelopment())
 // Migrate Database
 app.MigrateDatabase();
 
-app.UseHttpsRedirection();
-
-app.UseCors("ClientPermission");
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
