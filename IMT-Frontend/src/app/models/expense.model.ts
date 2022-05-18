@@ -1,6 +1,6 @@
 import {Base} from "./base.model";
 
-export interface Expense extends Base{
+export interface Expense extends Base {
   quantity: number,
   category: ExpenseCategory,
   userId: string,
