@@ -1,6 +1,7 @@
 using IMT_Backend.Application;
 using IMT_Backend.Application.Common.Interfaces;
 using IMT_Backend.Infrastructure;
+using IMT_Backend.WebUI.Extensions;
 using IMT_Backend.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,17 +23,6 @@ builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("ClientPermission", policy =>
-    {
-        policy.AllowAnyHeader()
-            .AllowAnyMethod()
-            .WithOrigins("https://localhost:4200/")
-            .AllowCredentials();
-    });
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,9 +32,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Migrate Database
+app.MigrateDatabase();
 
-app.UseCors("ClientPermission");
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
