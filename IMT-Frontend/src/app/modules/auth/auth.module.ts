@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './pages/login/login.component';
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AuthRoutingModule} from './auth-routing.module';
+import {LoginComponent} from './pages/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {AuthService} from "./services/auth.service";
 
 
 @NgModule({
@@ -14,8 +15,10 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     AuthRoutingModule,
-    AngularFireAuthModule,
+    provideAuth(() => getAuth()),
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [AuthService]
 })
-export class AuthModule { }
+export class AuthModule {
+}
