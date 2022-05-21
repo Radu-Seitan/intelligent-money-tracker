@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 
 import {AuthRoutingModule} from './auth-routing.module';
 import {RegisterComponent} from './pages/register/register.component';
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {ReactiveFormsModule} from "@angular/forms";
+import {getAuth, provideAuth} from "@angular/fire/auth";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -19,7 +19,7 @@ import {MatCardModule} from "@angular/material/card";
   imports: [
     CommonModule,
     AuthRoutingModule,
-    AngularFireAuthModule,
+    provideAuth(() => getAuth()),
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

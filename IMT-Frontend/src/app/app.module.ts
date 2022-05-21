@@ -3,10 +3,10 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,11 +15,10 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule, ,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
