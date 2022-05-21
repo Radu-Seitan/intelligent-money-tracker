@@ -1,0 +1,22 @@
+.container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+h1 {
+  padding: 6rem 0 1rem;
+}

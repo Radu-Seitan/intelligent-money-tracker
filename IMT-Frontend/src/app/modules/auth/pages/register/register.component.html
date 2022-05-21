@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Sign Up</h1>
+  <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
+    <mat-horizontal-stepper #stepper>
+      <div formGroupName="authData">
+        <mat-card>
+          <mat-step [stepControl]="signUpForm.controls['authData']">
+            <div class="col">
+            <mat-form-field appearance="legacy">
+              <input formControlName="email" placeholder="email" matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <input formControlName="password" placeholder="password" matInput/>
+            </mat-form-field>
+            <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+        </mat-card>
+      </div>
+      <div formGroupName="userData">
+        <mat-card>
+          <mat-step [stepControl]="signUpForm.controls['userData']">
+            <div class="col">
+            <mat-form-field appearance="legacy">
+              <input formControlName="username" placeholder="username" matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <input formControlName="sum" placeholder="sum" matInput/>
+            </mat-form-field>
+              <div class="row">
+            <button mat-button matStepperPrevious>Back</button>
+              <button mat-flat-button type="submit">Submit</button>
+              </div>
+            </div>
+          </mat-step>
+        </mat-card>
+      </div>
+    </mat-horizontal-stepper>
+  </form>
+</div>
