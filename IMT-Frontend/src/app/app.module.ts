@@ -7,6 +7,7 @@ import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, ,
+    BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     HttpClientModule,
     ReactiveFormsModule

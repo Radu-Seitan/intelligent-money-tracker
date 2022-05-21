@@ -1,40 +1,54 @@
 <div class="container">
-  <h1>Sign Up</h1>
+  <h1>SIGN UP</h1>
   <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
-    <mat-horizontal-stepper #stepper>
+    <mat-stepper #stepper>
       <div formGroupName="authData">
-        <mat-card>
-          <mat-step [stepControl]="signUpForm.controls['authData']">
+        <mat-step [label]="'Credentials'" [stepControl]="signUpForm.controls['authData']">
+          <mat-card>
             <div class="col">
-            <mat-form-field appearance="legacy">
-              <input formControlName="email" placeholder="email" matInput/>
-            </mat-form-field>
-            <mat-form-field appearance="legacy">
-              <input formControlName="password" placeholder="password" matInput/>
-            </mat-form-field>
-            <button mat-button matStepperNext>Next</button>
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput/>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input [type]="showPassword ? 'password' : 'text'" formControlName="password" matInput/>
+                <button (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="showPassword"
+                        mat-icon-button matSuffix>
+                  <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+              <button mat-button matStepperNext>Next</button>
             </div>
-          </mat-step>
-        </mat-card>
+          </mat-card>
+        </mat-step>
       </div>
       <div formGroupName="userData">
         <mat-card>
-          <mat-step [stepControl]="signUpForm.controls['userData']">
-            <div class="col">
-            <mat-form-field appearance="legacy">
-              <input formControlName="username" placeholder="username" matInput/>
-            </mat-form-field>
-            <mat-form-field appearance="legacy">
-              <input formControlName="sum" placeholder="sum" matInput/>
-            </mat-form-field>
-              <div class="row">
-            <button mat-button matStepperPrevious>Back</button>
-              <button mat-flat-button type="submit">Submit</button>
+          <mat-step [label]="'Details'" [stepControl]="signUpForm.controls['userData']">
+            <mat-card>
+              <div class="col">
+                <mat-form-field appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input formControlName="username" matInput/>
+                </mat-form-field>
+                <mat-form-field appearance="outline" floatLabel="always">
+                  <mat-label>Initial sum</mat-label>
+                  <input class="example-right-align" formControlName="sum" matInput placeholder="0" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+                <div class="row">
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button color="primary" mat-flat-button type="submit">Submit</button>
+                </div>
               </div>
-            </div>
+            </mat-card>
           </mat-step>
         </mat-card>
       </div>
-    </mat-horizontal-stepper>
+    </mat-stepper>
   </form>
+  <p>Already have an account?</p>
+  <a color="primary" mat-button>Sign In</a>
 </div>

@@ -10,6 +10,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
+import {AuthService} from "./services/auth.service";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {MatCardModule} from "@angular/material/card";
     MatButtonModule,
     MatStepperModule,
     MatCardModule,
-  ]
+    MatIconModule,
+  ],
+  providers: [AuthService]
 })
 export class AuthModule {
 }
