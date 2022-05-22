@@ -1,0 +1,47 @@
+.container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  padding: 6rem 0 1rem;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+button:hover {
+  color: #491EB0;
+  background-color: white;
+  border: #491EB0 inset 1px;
+}
