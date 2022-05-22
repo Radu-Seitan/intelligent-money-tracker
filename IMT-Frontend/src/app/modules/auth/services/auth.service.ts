@@ -9,7 +9,7 @@ import {Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassw
 })
 export class AuthService {
 
-  currentUser: User | null = null;
+  currentUser?: User | null = undefined;
 
   constructor(
     private _fireAuth: Auth,

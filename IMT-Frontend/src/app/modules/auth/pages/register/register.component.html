@@ -1,6 +1,6 @@
 <div class="container">
   <h1>SIGN UP</h1>
-  <form [formGroup]="signUpForm" (ngSubmit)="submitSignUpForm()">
+  <form [formGroup]="signUpForm">
     <mat-stepper #stepper>
       <div formGroupName="authData">
         <mat-step [label]="'Credentials'" [stepControl]="signUpForm.controls['authData']">
@@ -40,7 +40,7 @@
                 </mat-form-field>
                 <div class="row">
                   <button mat-button matStepperPrevious>Back</button>
-                  <button color="primary" mat-flat-button type="submit">Submit</button>
+                  <button (click)="submitSignUpForm()" color="primary" mat-flat-button type="submit">Submit</button>
                 </div>
               </div>
             </mat-card>
