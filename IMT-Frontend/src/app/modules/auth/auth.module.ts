@@ -12,11 +12,13 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
 import {AuthService} from "./services/auth.service";
 import {MatIconModule} from "@angular/material/icon";
+import {LoginComponent} from "./pages/login/login.component";
 
 
 @NgModule({
   declarations: [
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
