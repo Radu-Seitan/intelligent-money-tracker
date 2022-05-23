@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <img [routerLink]="['']" [src]="LOGO_PATH" alt="IMG">
+    <div *ngIf="_authService.currentUser !== undefined" class="links">
+      <div *ngIf="_authService.isLoggedIn; else generic">
+        <a>DASHBOARD</a>
+        <a>REPORTS</a>
+        <a (click)="_authService.signOut()">SIGN OUT</a>
+      </div>
+      <ng-template #generic>
+        <a [routerLink]="['/auth/login']">SIGN IN</a>
+        <a [routerLink]="['/auth/register']">SIGN UP</a>
+      </ng-template>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

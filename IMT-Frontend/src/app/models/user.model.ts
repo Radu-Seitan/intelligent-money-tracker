@@ -2,7 +2,7 @@ import {Expense} from "./expense.model";
 import {Income} from "./income.model";
 
 export interface User {
-  id: string,
+  id?: string
   username: string,
   sum: number,
   expenses?: Array<Expense>
