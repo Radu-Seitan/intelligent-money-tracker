@@ -6,6 +6,12 @@
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input formControlName="email" matInput/>
+          <mat-error *ngIf="email?.errors?.['email']">
+            The email address isn't valid.
+          </mat-error>
+          <mat-error *ngIf="email?.errors?.['required']">
+            The email address is required.
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
@@ -15,8 +21,16 @@
                   mat-icon-button matSuffix>
             <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
+          <mat-error *ngIf="password?.errors?.['minLength']">
+            The password must be at least 8 characters long.
+          </mat-error>
+          <mat-error *ngIf="password?.errors?.['required']">
+            The password is required.
+          </mat-error>
         </mat-form-field>
-        <button (click)="submitLoginForm()" color="primary" mat-flat-button type="submit">Login</button>
+        <button (click)="submitLoginForm()" [disabled]="loginForm.invalid" color="primary" mat-flat-button
+                type="submit">Login
+        </button>
       </mat-card>
     </div>
   </form>
