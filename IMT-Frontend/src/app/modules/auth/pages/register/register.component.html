@@ -9,6 +9,12 @@
               <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input formControlName="email" matInput/>
+                <mat-error *ngIf="email?.errors?.['email']">
+                  The email address isn't valid.
+                </mat-error>
+                <mat-error *ngIf="email?.errors?.['required']">
+                  The email address is required.
+                </mat-error>
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
@@ -18,6 +24,12 @@
                         mat-icon-button matSuffix>
                   <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="password?.errors?.['minLength']">
+                  The password must be at least 8 characters long.
+                </mat-error>
+                <mat-error *ngIf="password?.errors?.['required']">
+                  The password is required.
+                </mat-error>
               </mat-form-field>
               <button mat-button matStepperNext>Next</button>
             </div>
@@ -32,6 +44,9 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Username</mat-label>
                   <input formControlName="username" matInput/>
+                  <mat-error *ngIf="username?.errors?.['required']">
+                    The username is required.
+                  </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" floatLabel="always">
                   <mat-label>Initial sum</mat-label>
@@ -40,7 +55,9 @@
                 </mat-form-field>
                 <div class="row">
                   <button mat-button matStepperPrevious>Back</button>
-                  <button (click)="submitSignUpForm()" color="primary" mat-flat-button type="submit">Submit</button>
+                  <button (click)="submitSignUpForm()" [disabled]="this.signUpForm.invalid" color="primary"
+                          mat-flat-button type="submit">Submit
+                  </button>
                 </div>
               </div>
             </mat-card>
