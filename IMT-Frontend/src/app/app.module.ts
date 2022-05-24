@@ -13,11 +13,14 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {MatCardModule} from "@angular/material/card";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ErrorComponent} from './shared/error/error.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     provideAuth(() => getAuth()),
     MatCardModule,
     MatSnackBarModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
