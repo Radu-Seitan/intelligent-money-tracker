@@ -1,0 +1,36 @@
+.container {
+  padding: 0.5rem 3rem;
+}
+
+h1 {
+  margin-bottom: 2.5rem;
+  color: #491EB0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+mat-card {
+  width: 280px;
+  height: 300px;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: ease-in-out 500ms;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}

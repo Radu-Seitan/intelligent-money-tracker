@@ -4,4 +4,5 @@ export interface Store extends Base {
   name: string
   imageId?: string;
   appImage: string;
+  sum?: number;
 }

@@ -57,4 +57,22 @@ export class ChartService {
         return {datasets: datasets, labels: labels} as ChartData<'pie', number[], string | string[]>
       }))
   }
+
+  getExpensesPieChartStore(storeId: number) {
+    return this._expenseService.getExpensesByStoreId(storeId).pipe(
+      map<Expense[], ChartData<'pie', number[], string | string[]>>((expenses: Expense[]) => {
+        const labels: string[] = []
+        const sets = []
+        let categories = _.groupBy(expenses, 'category');
+        for (const category of Object.keys(categories)) {
+          const quantity = categories[category].reduce((a, b) => a + b.quantity, 0)
+          sets.push(quantity)
+          labels.push(this._categoryService.mapExpenseCategory(category));
+        }
+        const datasets = [{
+          data: sets
+        }]
+        return {datasets: datasets, labels: labels} as ChartData<'pie', number[], string | string[]>
+      }))
+  }
 }
