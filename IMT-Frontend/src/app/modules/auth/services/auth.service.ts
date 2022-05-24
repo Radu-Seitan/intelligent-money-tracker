@@ -25,6 +25,10 @@ export class AuthService {
       && this.currentUser !== null;
   }
 
+  get currentUserId() {
+    return JSON.parse(<string>localStorage.getItem('user')).uid;
+  }
+
   loginWithEmail({email, password}: AuthData) {
     return signInWithEmailAndPassword(this._fireAuth, email, password).then(() => {
       this.userSetup();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'IMT-Frontend';
-  showPassword: boolean = true;
-
-
-  getInputType() {
-    if (this.showPassword) {
-      return 'text';
-    }
-    return 'password';
-
-  }
-
-  toggleShowPassword() {
-    this.showPassword = !this.showPassword;
-  }
 }
