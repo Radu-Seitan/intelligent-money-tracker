@@ -13,6 +13,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {ImageComponent} from './utils/file/image/image.component';
 import {MatCardModule} from "@angular/material/card";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {MatCardModule} from "@angular/material/card";
     MatToolbarModule,
     provideAuth(() => getAuth()),
     MatCardModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

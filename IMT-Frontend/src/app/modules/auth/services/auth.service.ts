@@ -3,6 +3,7 @@ import {AuthData} from "../models/auth-data.model";
 import {User} from "../../../models/user.model";
 import {UserService} from "../../../services/user.service";
 import {Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "@angular/fire/auth";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     private _fireAuth: Auth,
     private _userService: UserService,
+    private _snackBar: MatSnackBar,
   ) {
     this.userSetup();
   }
@@ -26,7 +28,8 @@ export class AuthService {
   loginWithEmail({email, password}: AuthData) {
     return signInWithEmailAndPassword(this._fireAuth, email, password).then(() => {
       this.userSetup();
-    }).catch((error: any) => console.error(error));
+      this._snackBar.open('Success!', undefined, {duration: 3000})
+    }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}));
   }
 
   signUp(authData: AuthData, user: User) {
@@ -34,15 +37,17 @@ export class AuthService {
       user.id = res.user?.uid;
       user.expenses = [];
       user.incomes = [];
-      this._userService.createUser(user).subscribe()
-    }).catch((error: any) => console.error(error));
+      this._userService.createUser(user).subscribe();
+      this._snackBar.open('Success!', undefined, {duration: 3000})
+    }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}));
   }
 
   signOut() {
     return this._fireAuth.signOut().then(() => {
       localStorage.setItem('user', '{}');
       this.currentUser = null;
-    }).catch((error: any) => console.log(error))
+      this._snackBar.open('Success!', undefined, {duration: 3000})
+    }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}))
   }
 
   private userSetup() {
