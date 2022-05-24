@@ -4,6 +4,7 @@ import {User} from "../../../models/user.model";
 import {UserService} from "../../../services/user.service";
 import {Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "@angular/fire/auth";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,13 @@ export class AuthService {
     private _fireAuth: Auth,
     private _userService: UserService,
     private _snackBar: MatSnackBar,
+    private _router: Router,
   ) {
     this.userSetup();
   }
 
   get isLoggedIn() {
-    return (localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')!) !== '{}')
-      && this.currentUser !== null;
+    return <string>localStorage.getItem('user') !== '{}';
   }
 
   get currentUserId() {
@@ -32,7 +33,9 @@ export class AuthService {
   loginWithEmail({email, password}: AuthData) {
     return signInWithEmailAndPassword(this._fireAuth, email, password).then(() => {
       this.userSetup();
-      this._snackBar.open('Success!', undefined, {duration: 3000})
+      this._snackBar.open('Success!', undefined, {duration: 3000});
+      this._router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+        this._router.navigate(['']).then());
     }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}));
   }
 
@@ -42,7 +45,9 @@ export class AuthService {
       user.expenses = [];
       user.incomes = [];
       this._userService.createUser(user).subscribe();
-      this._snackBar.open('Success!', undefined, {duration: 3000})
+      this._snackBar.open('Success!', undefined, {duration: 3000});
+      this._router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+        this._router.navigate(['']).then());
     }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}));
   }
 
@@ -50,7 +55,9 @@ export class AuthService {
     return this._fireAuth.signOut().then(() => {
       localStorage.setItem('user', '{}');
       this.currentUser = null;
-      this._snackBar.open('Success!', undefined, {duration: 3000})
+      this._snackBar.open('Success!', undefined, {duration: 3000});
+      this._router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+        this._router.navigate(['/auth/login']).then());
     }).catch((error: any) => this._snackBar.open(`Error! : ${error}`, undefined, {duration: 3000}))
   }
 
