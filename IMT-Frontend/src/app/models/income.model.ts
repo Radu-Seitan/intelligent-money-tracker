@@ -2,7 +2,7 @@ import {Base} from "./base.model";
 
 export interface Income extends Base {
   quantity: number,
-  category: IncomeCategory,
+  category: IncomeCategory | string,
   userId: string,
 }
 
