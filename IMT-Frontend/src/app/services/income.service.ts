@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Income, IncomeCategory} from "../models/income.model";
+import {CategoryService} from "./category.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class IncomeService {
   readonly #baseUrl = environment.apiUrl;
   readonly #endpoint = '/api/Incomes';
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private _categoryService: CategoryService) {
   }
 
   getIncomes() {

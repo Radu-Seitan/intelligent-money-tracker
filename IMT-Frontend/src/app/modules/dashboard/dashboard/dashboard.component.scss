@@ -1,0 +1,45 @@
+.chart {
+  display: block;
+  width: 400px;
+  margin-right: 2rem;
+}
+
+.container {
+  padding: 0.5rem 3rem;
+}
+
+.data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scrollable {
+  height: 500px;
+  width: 320px;
+}
+
+.expense {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p, h5 {
+  margin: 0;
+}
+
+.header-details {
+  display: flex;
+  justify-content: space-between;
+
+  & > h1 {
+    margin-bottom: 2.5rem;
+    color: #491EB0;
+  }
+}
+
+h1, h3 {
+  & > span {
+    font-weight: lighter;
+  }
+}

@@ -1,0 +1,88 @@
+<div *ngIf="_authService.currentUser !== undefined" class="container">
+  <div *ngIf="_authService.currentUser" class="header-details">
+    <h1><span>Welcome,</span> {{_authService.currentUser.username}}</h1>
+    <h3><span>Current sold:</span> {{_authService.currentUser.sum}}$</h3>
+  </div>
+  <div class="data">
+    <mat-card class="chart">
+      <h3>Expenses</h3>
+      <mat-card-subtitle>This month: {{parseMonth(monthExpense)}}</mat-card-subtitle>
+      <button (click)="decExpenseMonth()" mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button (click)="incExpenseMonth()" mat-icon-button>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <div *ngIf="expenseChart$ | async as chart">
+        <canvas *ngIf="chart.datasets.length !== 0 && chart.labels!.length !== 0; else noExpenseData"
+                [data]="chart"
+                [legend]="true"
+                [type]="'pie'"
+                baseChart
+                width="400"
+        ></canvas>
+      </div>
+      <ng-template #noExpenseData>
+        <h3>No data for month: {{parseMonth(monthExpense)}}</h3>
+      </ng-template>
+    </mat-card>
+    <mat-card class="chart">
+      <h3>Incomes</h3>
+      <mat-card-subtitle>This month: {{parseMonth(monthIncome)}}</mat-card-subtitle>
+      <button (click)="decIncomeMonth()" mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button (click)="incIncomeMonth()" mat-icon-button>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <div *ngIf="incomeChart$ | async as chart">
+        <canvas *ngIf="chart.datasets.length !== 0 && chart.labels!.length !== 0; else noIncomeData"
+                [data]="chart"
+                [legend]="true"
+                [type]="'pie'"
+                baseChart
+                width="400"
+        ></canvas>
+      </div>
+      <ng-template #noIncomeData>
+        <h3>No data for month: {{parseMonth(monthIncome)}}</h3>
+      </ng-template>
+    </mat-card>
+    <mat-card>
+      <mat-tab-group>
+        <mat-tab label="Expenses">
+          <cdk-virtual-scroll-viewport class="scrollable" itemSize="500">
+            <div *ngIf="expenses$ | async as expenses">
+              <div *ngIf="expenses.length !== 0; else emptyExpense">
+                <div *ngFor="let expense of expenses" class="expense">
+                  <div class="details">
+                    <h5>{{expense.category}}</h5>
+                    <p>{{expense.created}}</p>
+                  </div>
+                  <h4>{{expense.quantity}}$</h4>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+          <ng-template #emptyExpense><h3>No data about expenses</h3></ng-template>
+        </mat-tab>
+        <mat-tab label="Incomes">
+          <cdk-virtual-scroll-viewport class="scrollable" itemSize="500">
+            <div *ngIf="incomes$ | async as incomes">
+              <div *ngIf="incomes.length !== 0; else emptyIncome">
+                <div *ngFor="let income of incomes" class="expense">
+                  <div class="details">
+                    <h5>{{income.category}}</h5>
+                    <p>{{income.created}}</p>
+                  </div>
+                  <h4>{{income.quantity}}$</h4>
+                </div>
+              </div>
+            </div>
+          </cdk-virtual-scroll-viewport>
+          <ng-template #emptyIncome><h3>No data about incomes</h3></ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>
