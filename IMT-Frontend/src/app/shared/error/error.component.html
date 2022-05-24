@@ -1,0 +1,7 @@
+<div class="container">
+  <h3>Ooops!</h3>
+  <h1>PAGE NOT FOUND</h1>
+  <button *ngIf="!_authService.isLoggedIn" [routerLink]="['']" color="primary" mat-flat-button>Go back</button>
+  <button *ngIf="_authService.isLoggedIn" [routerLink]="['/auth/login']" color="primary" mat-flat-button>Go back
+  </button>
+</div>
