@@ -1,0 +1,20 @@
+<mat-card class="chart">
+  <p mat-dialog-close="">
+    <mat-icon>close</mat-icon>
+  </p>
+  <h3>Expenses</h3>
+  <mat-card-subtitle>Store: {{store.name}}</mat-card-subtitle>
+  <div *ngIf="chart$ | async as chart">
+    <canvas *ngIf="chart.datasets.length !== 0 && chart.labels!.length !== 0; else noExpenseData"
+            [data]="chart"
+            [legend]="true"
+            [type]="'pie'"
+            baseChart
+            height="600"
+            width="700"
+    ></canvas>
+  </div>
+  <ng-template #noExpenseData>
+    <h3>No data for store: {{store.name}}</h3>
+  </ng-template>
+</mat-card>

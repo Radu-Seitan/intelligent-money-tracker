@@ -8,15 +8,17 @@ import {ImageService} from "../image.service";
 })
 export class ImageComponent implements OnInit {
   @Input()
-  storeId!: string;
-  imageSource: string | ArrayBuffer | null = null;
+  storeId?: string;
+  imageSource: string | ArrayBuffer | null = "https://i.ytimg.com/vi/iD0wFUlZGv0/maxresdefault.jpg";
 
-  constructor(private _fileService: ImageService) { }
+  constructor(private _fileService: ImageService) {
+  }
 
   ngOnInit(): void {
-    this._fileService.getImageByStoreId(this.storeId).subscribe(data => {
-      this.createImageFromBlob(data)
-    })
+    if (this.storeId)
+      this._fileService.getImageByStoreId(this.storeId).subscribe(data => {
+        this.createImageFromBlob(data)
+      })
   }
 
   private createImageFromBlob(image: Blob) {

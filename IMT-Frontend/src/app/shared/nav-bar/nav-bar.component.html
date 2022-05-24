@@ -4,7 +4,7 @@
     <div *ngIf="_authService.currentUser !== undefined" class="links">
       <div *ngIf="_authService.isLoggedIn; else generic">
         <a [routerLink]="['/dashboard']">DASHBOARD</a>
-        <a>REPORTS</a>
+        <a [routerLink]="['/reports']">REPORTS</a>
         <a (click)="_authService.signOut()">SIGN OUT</a>
       </div>
       <ng-template #generic>

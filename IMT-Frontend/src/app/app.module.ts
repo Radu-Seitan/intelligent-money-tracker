@@ -11,7 +11,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NavBarComponent} from './shared/nav-bar/nav-bar.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {getAuth, provideAuth} from "@angular/fire/auth";
-import {ImageComponent} from './utils/file/image/image.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
@@ -19,7 +18,6 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
   declarations: [
     AppComponent,
     NavBarComponent,
-    ImageComponent
   ],
   imports: [
     BrowserModule,

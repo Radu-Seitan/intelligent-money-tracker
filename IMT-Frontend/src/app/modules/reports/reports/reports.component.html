@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Stores</h1>
+  <div *ngIf="stores$ | async as stores">
+    <div *ngIf="stores.length !== 0; else noStores" class="grid">
+      <mat-card (click)="getChart(store)" *ngFor="let store of stores">
+        <app-image [storeId]="store.imageId"></app-image>
+        <div class="details">
+          <h3>{{store.name}}</h3>
+          <h3>{{store.sum}}$</h3>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <ng-template #noStores>No stores found.</ng-template>
+</div>
