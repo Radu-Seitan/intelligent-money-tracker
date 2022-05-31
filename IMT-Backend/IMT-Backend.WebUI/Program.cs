@@ -8,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ClientPermission", policy =>
+    {
+        policy.SetIsOriginAllowed((host) => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,5 +51,7 @@ app.MigrateDatabase();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("ClientPermission");
 
 app.Run();
