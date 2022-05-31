@@ -37,11 +37,10 @@ services:
       - imt-backend
     volumes:
       - ./IMT-Frontend:/app
-      - node_modules:/app/node_modules
 
   sqlserver:
-    # image: mcr.microsoft.com/mssql/server:2019-latest # if working on Windows
-    image: mcr.microsoft.com/azure-sql-edge:latest # if working on MAC arm64
+    image: mcr.microsoft.com/mssql/server:2019-latest # if working on Windows
+    #image: mcr.microsoft.com/azure-sql-edge:latest # if working on MAC arm64
     user: root
     environment:
       - "SA_PASSWORD=yourStrong($$)Password"
